@@ -6,7 +6,7 @@
 Summary:              Package management service
 Name:                 PackageKit
 Version:              1.2.6
-Release:              1.1%{?dist}
+Release:              1.2%{?dist}
 License:              GPL-2.0-or-later AND LGPL-2.1-or-later
 URL:                  http://www.freedesktop.org/software/PackageKit/
 Source0:              http://www.freedesktop.org/software/PackageKit/releases/%{name}-%{version}.tar.xz
@@ -31,6 +31,7 @@ Patch2:               shutdown-on-idle.patch
 # packagekitd[1113]: Failed to load the backend: opening module dnf failed : /usr/lib64/packagekit-backend/libpk_backend_dnf.so: undefined symbol: pk_backend_job_update_details
 Patch3:               0001-packagekitd-Use-export_dynamic-explicitly.patch
 Patch4: PackageKit-1.2.6-CVE-2024-0217.patch
+Patch5: 0002-Do-not-allow-re-invoking-methods-on-non-new-transactions.patch
 
 BuildRequires:        glib2-devel >= %{glib2_version}
 BuildRequires:        xmlto
@@ -256,6 +257,9 @@ systemctl disable packagekit-offline-update.service > /dev/null 2>&1 || :
 %{_datadir}/vala/vapi/packagekit-glib2.deps
 
 %changelog
+* Thu Apr 30 2026 Pratham Patel <ppatel@ciq.com> - 1.2.6-1.2
+- Fix CVE-2026-41651
+
 * Fri Feb 27 2026 Max Spevack <max@ciq.com> - 1.2.6-1.1
 - Fix CVE-2024-0217
 
